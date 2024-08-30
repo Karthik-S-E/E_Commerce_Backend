@@ -20,7 +20,7 @@ public class MyGlobalException {
         e.getBindingResult().getAllErrors().forEach(err->{
             String fieldName=((FieldError)err).getField();
             String message=err.getDefaultMessage();
-            if(message==err.getDefaultMessage()){
+            if(message.equals(err.getDefaultMessage())){
                 message="Provide correct Resource !!! "+err.getDefaultMessage();
             }
             response.put(fieldName,message);
