@@ -1,14 +1,14 @@
 package com.myProject.e_Commerce.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -19,9 +19,13 @@ import org.springframework.stereotype.Repository;
 public class Category {
 
  @Id
- @GeneratedValue(strategy = GenerationType.AUTO)
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long categoryId;
  @NotBlank
   private String categoryName;
+
+ @OneToMany(mappedBy = "category" ,cascade = CascadeType.ALL)
+ @JsonIgnore
+ private List<Product> products;
 
 }

@@ -13,20 +13,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
-//    private List<Category> categories= new ArrayList<>();
+
 @Autowired
     private CategoryRepository categoryRepository;
 
@@ -70,20 +65,16 @@ public CategoryDTO createCategory(CategoryDTO categoryDTO) {
     if(savedcategory != null){
         throw new APIException("Category with the name "+categoryDTO.getCategoryName()+" already exists");
     }
-
    Category categorySaved= categoryRepository.save(category);
-    CategoryDTO categoryDTO1=modelMapper.map(categorySaved,CategoryDTO.class);
-    return categoryDTO1;
+    return modelMapper.map(categorySaved,CategoryDTO.class);
 }
-
     @Override
     public CategoryDTO deleteCategory(long categoryId) {
         Category category = categoryRepository.findById(categoryId).orElseThrow(()->
                 new ResourceNotFoundException("Category"," CategoryId ",categoryId));
         category.setCategoryId(categoryId);
         categoryRepository.delete(category);
-        CategoryDTO categoryDTO=modelMapper.map(category,CategoryDTO.class);
-        return categoryDTO;
+        return modelMapper.map(category,CategoryDTO.class);
     }
 
     @Override
@@ -93,7 +84,6 @@ public CategoryDTO createCategory(CategoryDTO categoryDTO) {
                 new ResourceNotFoundException("Category"," CategoryId ",categoryId));
         category.setCategoryId(categoryId);
         savedCategory=  categoryRepository.save(category);
-        CategoryDTO categoryDTO1=modelMapper.map(savedCategory,CategoryDTO.class);
-        return categoryDTO1;
+        return modelMapper.map(savedCategory,CategoryDTO.class);
     }
 }
