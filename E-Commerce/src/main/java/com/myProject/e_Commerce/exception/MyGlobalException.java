@@ -42,4 +42,9 @@ public class MyGlobalException {
         return new ResponseEntity<APIResponse>(apiResponse,HttpStatus.BAD_REQUEST);
 
     }
+    public ResponseEntity<APIResponse> myUserNotFoundException(UserNotFoundException e){
+        String message=e.getMessage();
+        APIResponse apiResponse= new APIResponse(message,false);
+        return new ResponseEntity<APIResponse>(apiResponse,HttpStatus.NOT_FOUND);
+    }
 }
