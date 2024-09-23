@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "cart_item")
+@Table(name = "cart_items")
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartItemId;
@@ -25,7 +24,6 @@ public class CartItem {
     private Product product;
 
     private Integer quantity;
-    private Double discount;
-    private Double productPrice;
-
+    private double discount;
+    private double productPrice;
 }
