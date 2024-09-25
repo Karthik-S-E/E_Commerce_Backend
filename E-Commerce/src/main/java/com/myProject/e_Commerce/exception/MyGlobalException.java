@@ -42,7 +42,15 @@ public class MyGlobalException {
         return new ResponseEntity<APIResponse>(apiResponse,HttpStatus.BAD_REQUEST);
 
     }
+    @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<APIResponse> myUserNotFoundException(UserNotFoundException e){
+        String message=e.getMessage();
+        APIResponse apiResponse= new APIResponse(message,false);
+        return new ResponseEntity<APIResponse>(apiResponse,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NoAddressFoundException.class)
+    public ResponseEntity<APIResponse> myNoAddressFoundException(NoAddressFoundException e){
         String message=e.getMessage();
         APIResponse apiResponse= new APIResponse(message,false);
         return new ResponseEntity<APIResponse>(apiResponse,HttpStatus.NOT_FOUND);
